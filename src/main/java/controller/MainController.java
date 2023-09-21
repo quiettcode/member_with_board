@@ -1,11 +1,18 @@
 package controller;
 
 import dto.MemberSaveDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import service.MemberService;
 
+@RequiredArgsConstructor
+@Controller
 public class MainController {
+
+    private final MemberService ms;
 
     @GetMapping("/")
     public String index() {
@@ -19,7 +26,7 @@ public class MainController {
 
     @PostMapping("save")
     public String save(@ModelAttribute MemberSaveDTO memberSaveDTO) {
-//        Long memberId
+        Long memberId = ms.save(memberSaveDTO);
         return "member/login";
     }
 
